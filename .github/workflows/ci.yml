@@ -1,4 +1,4 @@
-name: pruebas ci
+name: CI/CD Proyecto
 
 on:
   push:
@@ -7,13 +7,48 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  build:
+
+  verificar_codigo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout code
+      - name: Checkout del repositorio
         uses: actions/checkout@v4
 
-      - name: Hola mundo
-        run: echo "Hola mundo"
+      - name: Verificar archivos HTML y CSS
+        run: |
+          echo "Verificando archivos..."
+          test -f home.html
+          test -f styles.css
+          echo "Archivos encontrados correctamente"
+
+  desplegar_pagina:
+    needs: verificar_codigo
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout del Repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir Artifacts de Despliegue
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './'
+
+      - name: Iniciar Despliegue a Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
