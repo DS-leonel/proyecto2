@@ -24,7 +24,7 @@ jobs:
       - name: Verificar archivos HTML y CSS
         run: |
           echo "Verificando archivos..."
-          test -f home.html
+          test -f index.html
           test -f styles.css
           echo "Archivos encontrados correctamente"
 
