@@ -1,14 +1,30 @@
 body{
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+}
+
+.container{
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     text-align: center;
-    margin-top: 100px;
 }
 
 h1{
-    color: blue;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #ffffff;
 }
 
 p{
-    color: gray;
+    font-size: 1.2rem;
+    color: #e0e0e0;
 }
